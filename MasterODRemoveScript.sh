@@ -31,40 +31,56 @@ falseENet=`dscl /LDAPv3/${domain} -search /Computers ENetAddress ${nicAddress} |
 
 # FIRST OD check
 if [ "${check4OD}" == "${domain}" ]; then
-dsconfigldap -r ${domain}
-sleep 3
-echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
-sleep 3
+        dsconfigldap -r ${domain}
+                sleep 3
+        echo "y" | dsconfigldap -a $domain -n $domain
+                sleep 3
+        dsconfigldap -r ${domain}
+                sleep 3
+        echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
+                sleep 3
 echo "This machine was rebound to ${domain}."
 
 # SECOND OD check
 else if [ "${check4OD}" == "${badDomain1}" ]; then
-dsconfigldap -r "${badDomain1}"
-sleep 3
-echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
-sleep 3
+        dsconfigldap -r "${badDomain1}"
+                sleep 3
+        echo "y" | dsconfigldap -a $domain -n $domain
+                sleep 3
+        dsconfigldap -r ${domain}
+                sleep 3         
+        echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
+                sleep 3
 echo "This machine was bound to ${domain}."
 
 # THIRD OD check
 else if [ "${check4OD}" == "${badDomain2}" ]; then
-dsconfigldap -r "${badDomain2}"
-sleep 3
-echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
-sleep 3
+        dsconfigldap -r "${badDomain2}"
+                sleep 3
+        echo "y" | dsconfigldap -a $domain -n $domain
+                sleep 3
+        dsconfigldap -r ${domain}
+                sleep 3
+        echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
+                sleep 3
 echo "This machine was bound to ${domain}."
 
 # FOURTH OD check
 else if [ "${check4OD}" == "${badDomain3}" ]; then
-dsconfigldap -r "${badDomain3}"
-sleep 3
-echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
-sleep 3
+        dsconfigldap -r "${badDomain3}"
+                sleep 3
+        echo "y" | dsconfigldap -a $domain -n $domain
+                sleep 3
+        dsconfigldap -r ${domain}
+                sleep 3
+        echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
+                sleep 3
 echo "This machine was bound to ${domain}."
 
-# FRESH bind to OD
+# Fresh bind to OD
 else
-echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
-sleep 3
+        echo "y" | dsconfigldap -a $domain -n $domain -u $odAdmin -p $odPassword
+                sleep 3
 fi
 fi
 fi
